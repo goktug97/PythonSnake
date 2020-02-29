@@ -25,7 +25,7 @@ class Snake(object):
     def turn(self, direction):
         if direction:
             self.x_direction, self.y_direction = self.y_direction, self.x_direction
-            self.x_direction *= direction
+            self.x_direction *= -direction
             self.y_direction *= direction
         
 class Game(object):
@@ -59,7 +59,6 @@ class Game(object):
         self.update_map()
 
     def draw(self, block_size: int):
-        size = self.map_size * block_size
         screen = self.map.copy()
         screen[self.apple[1], self.apple[0]] = 0.5
         screen = np.repeat(screen, block_size, axis=1)

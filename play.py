@@ -16,13 +16,13 @@ if __name__ == '__main__':
         screen = game.draw(args.block_size)
         cv2.imshow('cvwindow', screen)
         key = cv2.waitKey(50)
-        if key == 81:
-            direction = -game.snake.y_direction
-        elif key == 82:
-            direction = -game.snake.x_direction
-        elif key == 83:
+        if key == 81 or key == ord('a') or key == ord('h'):
             direction = game.snake.y_direction
-        elif key == 84:
+        elif key == 82 or key == ord('w') or key == ord('k'):
+            direction = -game.snake.x_direction
+        elif key == 83 or key == ord('d') or key == ord('l'):
+            direction = -game.snake.y_direction
+        elif key == 84 or key == ord('s') or key == ord('j'):
             direction = game.snake.x_direction
         elif key == 27:
             break
