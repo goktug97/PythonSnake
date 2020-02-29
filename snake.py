@@ -24,10 +24,9 @@ class Snake(object):
 
     def turn(self, direction):
         if direction:
-            self.x_direction += direction
-            self.y_direction += direction
-            self.x_direction %= (direction * 2)
-            self.y_direction %= (direction * 2)
+            self.x_direction, self.y_direction = self.y_direction, self.x_direction
+            self.x_direction *= direction
+            self.y_direction *= direction
         
 class Game(object):
     def __init__(self, map_size):
@@ -41,7 +40,7 @@ class Game(object):
         self.map = np.zeros((self.map_size-2, self.map_size-2))
         self.map  = np.pad(self.map, ((1, 1), (1, 1)), 'constant', constant_values=1)
         for part in self.snake.body:
-            self.map[part[0], part[1]] = 1
+            self.map[part[1], part[0]] = 1
 
     def add_apple(self):
         xgrid, ygrid = np.meshgrid(np.arange(self.map_size), np.arange(self.map_size))
@@ -52,9 +51,17 @@ class Game(object):
 
     def step(self, direction):
         self.snake.move(direction)
-        if self.map[self.snake.head[0], self.snake.head[1]]:
-            self.done = True
-        elif self.snake.head == self.apple:
+        if self.snake.head == self.apple:
             self.snake.grow()
             self.add_apple()
+        elif self.map[self.snake.head[1], self.snake.head[0]]:
+            self.done = True
         self.update_map()
+
+    def draw(self, block_size: int):
+        size = self.map_size * block_size
+        screen = self.map.copy()
+        screen[self.apple[1], self.apple[0]] = 0.5
+        screen = np.repeat(screen, block_size, axis=1)
+        screen = np.repeat(screen, block_size, axis=0)
+        return screen
