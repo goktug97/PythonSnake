@@ -29,3 +29,12 @@ if __name__ == '__main__':
         else:
             direction = 0
         game.step(direction)
+    size = game.map_size*args.block_size
+    scale = 3
+    cv2.putText(img = screen, text = 'Game Over',
+                org = (size//(2*scale), size//2),
+                fontFace = cv2.FONT_HERSHEY_SIMPLEX,
+                fontScale = scale, color = 0.5,
+                thickness=4)
+    cv2.imshow('cvwindow', screen)
+    cv2.waitKey(0)
