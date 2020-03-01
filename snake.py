@@ -46,8 +46,9 @@ class Game(object):
         xgrid, ygrid = np.meshgrid(np.arange(self.map_size), np.arange(self.map_size))
         free_x = xgrid[self.map == 0]
         free_y = ygrid[self.map == 0]
-        idx = np.random.randint(len(free_x))
-        self.apple = (free_x[idx], free_y[idx])
+        if len(free_x):
+            idx = np.random.randint(len(free_x))
+            self.apple = (free_x[idx], free_y[idx])
 
     def step(self, direction):
         self.snake.move(direction)
