@@ -39,8 +39,8 @@ class Game(object):
     def update_map(self):
         self.map = np.zeros((self.map_size-2, self.map_size-2))
         self.map  = np.pad(self.map, ((1, 1), (1, 1)), 'constant', constant_values=1)
-        for part in self.snake.body:
-            self.map[part[1], part[0]] = 1
+        body = np.array(self.snake.body)
+        self.map[body[:, 1], body[:, 0]] = 1
 
     def add_apple(self):
         xgrid, ygrid = np.meshgrid(np.arange(self.map_size), np.arange(self.map_size))
