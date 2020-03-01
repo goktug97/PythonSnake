@@ -6,10 +6,11 @@ import cv2
 
 import snake
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Python Graph Slam')
     parser.add_argument('--map_size', type=int, help='Map Size', default=50)
-    parser.add_argument('--block_size', type=int, help='Block Size', default=15)
+    parser.add_argument('--block_size', type=int,
+            help='Block Size', default=15)
     args = parser.parse_args()
     game = snake.Game(args.map_size)
     while not game.done:
@@ -38,3 +39,6 @@ if __name__ == '__main__':
                 thickness=4)
     cv2.imshow('cvwindow', screen)
     cv2.waitKey(0)
+
+if __name__ == '__main__':
+    main()
