@@ -7,7 +7,7 @@ import cv2
 import snake
 
 def main():
-    parser = argparse.ArgumentParser(description='Python Graph Slam')
+    parser = argparse.ArgumentParser(description='Python Snake Game')
     parser.add_argument('--map_size', type=int, help='Map Size', default=50)
     parser.add_argument('--block_size', type=int,
             help='Block Size', default=15)
