@@ -43,7 +43,10 @@ while not game.done:
     cv2.imshow('center', screen)
     if cv2.waitKey(50) == 27:
         break
-    action = best_ai.eval(game.map, game.snake.head, game.apple)
+    action = best_ai.eval(game.map, game.snake.head,
+                          game.snake.x_direction,
+                          game.snake.y_direction,
+                          game.apple)
     game.step(action)
 ```
 
