@@ -6,7 +6,6 @@ A Snake environment to train AIs.
 ![Playing](https://raw.githubusercontent.com/goktug97/PythonSnake/master/snake.gif)
 
 ## Requirements
-* Python >= 3.6
 * numpy
 
 ### Demo GUI
