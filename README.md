@@ -39,7 +39,7 @@ game = snake.Game()
 best_ai = AwesomeAIAlgorithm.BestAI()
 
 while not game.done:
-    screen = game.draw()
+    screen = game.draw(block_size=15)
     cv2.imshow('center', screen)
     if cv2.waitKey(50) == 27:
         break
