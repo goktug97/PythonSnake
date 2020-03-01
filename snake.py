@@ -51,13 +51,14 @@ class Game(object):
             self.apple = (free_x[idx], free_y[idx])
 
     def step(self, direction):
-        self.snake.move(direction)
-        if self.snake.head == self.apple:
-            self.snake.grow()
-            self.add_apple()
-        elif self.map[self.snake.head[1], self.snake.head[0]]:
-            self.done = True
-        self.update_map()
+        if not self.done:
+            self.snake.move(direction)
+            if self.snake.head == self.apple:
+                self.snake.grow()
+                self.add_apple()
+            elif self.map[self.snake.head[1], self.snake.head[0]]:
+                self.done = True
+            self.update_map()
 
     def draw(self, block_size: int):
         screen = self.map.copy()
