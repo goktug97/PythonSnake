@@ -55,10 +55,12 @@ class Game(object):
             self.snake.move(direction)
             if self.snake.head == self.apple:
                 self.snake.grow()
+                self.update_map()
                 self.add_apple()
             elif self.map[self.snake.head[1], self.snake.head[0]]:
                 self.done = True
-            self.update_map()
+            else:
+                self.update_map()
 
     def draw(self, block_size: int):
         screen = self.map.copy()
