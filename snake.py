@@ -1,12 +1,12 @@
 import numpy as np
 
 class Snake(object):
-    def __init__(self, map_size):
+    def __init__(self, map_size, snake_size):
         self.x_direction = 1
         self.y_direction = 0
         self.head = (map_size//2, map_size//2)
         self.body = [self.head]
-        for i in range(2):
+        for i in range(snake_size-1):
             self.body.append((self.body[-1][0]-self.x_direction,
                               self.body[-1][1]-self.y_direction))
 
@@ -27,11 +27,18 @@ class Snake(object):
             self.x_direction, self.y_direction = self.y_direction, self.x_direction
             self.x_direction *= -direction
             self.y_direction *= direction
-        
+
 class Game(object):
-    def __init__(self, map_size):
+    def __init__(self, map_size, snake_size):
         self.map_size = map_size
-        self.snake = Snake(self.map_size)
+        self.snake_size = snake_size
+        self.snake = Snake(self.map_size, self.snake_size)
+        self.update_map()
+        self.add_apple()
+        self.done = False
+
+    def reset(self):
+        self.snake = Snake(self.map_size, self.snake_size)
         self.update_map()
         self.add_apple()
         self.done = False

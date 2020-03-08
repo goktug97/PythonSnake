@@ -9,10 +9,11 @@ import snake
 def main():
     parser = argparse.ArgumentParser(description='Python Snake Game')
     parser.add_argument('--map_size', type=int, help='Map Size', default=50)
+    parser.add_argument('--snake_size', type=int, help='Snake Size', default=3)
     parser.add_argument('--block_size', type=int,
             help='Block Size', default=15)
     args = parser.parse_args()
-    game = snake.Game(args.map_size)
+    game = snake.Game(args.map_size, args.snake_size)
     while not game.done:
         screen = game.draw(args.block_size)
         cv2.imshow('cvwindow', screen)
@@ -25,6 +26,8 @@ def main():
             direction = -game.snake.y_direction
         elif key == 84 or key == ord('s') or key == ord('j'):
             direction = game.snake.x_direction
+        elif key == ord('r'):
+            game.reset()
         elif key == 27:
             break
         else:
