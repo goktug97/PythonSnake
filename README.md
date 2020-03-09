@@ -3,7 +3,7 @@ Python Snake
 
 A Snake environment to train AIs.
 
-![Playing](https://raw.githubusercontent.com/goktug97/PythonSnake/master/snake.gif)
+![Playing](https://raw.githubusercontent.com/goktug97/PythonSnake/master/snakeai.gif)
 
 ## Requirements
 * numpy
