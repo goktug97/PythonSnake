@@ -41,7 +41,7 @@ def main():
     cv2.putText(img = screen, text = text,
                 org = (int(size//2-len(text)*9*scale), int(size//2+9*scale)),
                 fontFace = cv2.FONT_HERSHEY_SIMPLEX,
-                fontScale = scale, color = 0.5,
+                fontScale = scale, color = (1, 1, 1),
                 thickness = thickness)
 
     cv2.imshow('cvwindow', screen)

@@ -71,7 +71,23 @@ class Game(object):
 
     def draw(self, block_size: int):
         screen = self.map.copy()
-        screen[self.apple[1], self.apple[0]] = 0.5
+        screen = np.repeat(screen[:, :, np.newaxis], 3, axis=2) + 0.05
+
+        mask = np.ones((block_size-1*2, block_size-1*2, 3))
+        mask = np.pad(mask, ((1, 1), (1, 1), (0, 0)), 'constant', constant_values=0)
+        body = np.array(self.snake.body)
+        screen[body[:, 1], body[:, 0], :] = (0, 1, 0)
+        screen[self.apple[1], self.apple[0], :] = (0, 0, 1)
+
         screen = np.repeat(screen, block_size, axis=1)
         screen = np.repeat(screen, block_size, axis=0)
+
+        for part in self.snake.body:
+            screen[part[1]*block_size:part[1]*block_size+block_size,
+                   part[0]*block_size:part[0]*block_size+block_size, :] *= mask
+
+        screen[
+            self.apple[1]*block_size:self.apple[1]*block_size+block_size,
+            self.apple[0]*block_size:self.apple[0]*block_size+block_size, :] *= mask
+
         return screen
