@@ -36,6 +36,7 @@ class Game(object):
         self.update_map()
         self.add_apple()
         self.done = False
+        self.won = False
 
     def reset(self):
         self.snake = Snake(self.map_size, self.snake_size)
@@ -56,6 +57,9 @@ class Game(object):
         if len(free_x):
             idx = np.random.randint(len(free_x))
             self.apple = (free_x[idx], free_y[idx])
+        else:
+            self.won = True
+            self.done = True
 
     def step(self, direction):
         if not self.done:
@@ -77,7 +81,8 @@ class Game(object):
         mask = np.pad(mask, ((1, 1), (1, 1), (0, 0)), 'constant', constant_values=0)
         body = np.array(self.snake.body)
         screen[body[:, 1], body[:, 0], :] = (0, 1, 0)
-        screen[self.apple[1], self.apple[0], :] = (0, 0, 1)
+        if not self.won:
+            screen[self.apple[1], self.apple[0], :] = (0, 0, 1)
 
         screen = np.repeat(screen, block_size, axis=1)
         screen = np.repeat(screen, block_size, axis=0)
